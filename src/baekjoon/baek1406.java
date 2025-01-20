@@ -1,8 +1,8 @@
+package baekjoon;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
-import java.util.Scanner;
 import java.util.Stack;
 
 public class baek1406 {
