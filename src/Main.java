@@ -1,69 +1,23 @@
-import java.util.*;
+import java.util.Scanner;
 
 // 12904
 public class Main {
     public static void main(String[] args) {
+        System.out.println("월과 일을 입력하세요.");
         Scanner sc = new Scanner(System.in);
 
-        StringBuilder S = new StringBuilder(sc.nextLine());
-        StringBuilder T = new StringBuilder(sc.nextLine());
+        String[] input = sc.nextLine().split(" ");
 
-        solution(S, T);
-        System.out.println(bfs(S, T));
+        int month = Integer.parseInt(input[0]);
+        int day = Integer.parseInt(input[1]);
 
-        sc.close();
-    }
+        int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int allDays = day;
 
-    public static void solution(StringBuilder S, StringBuilder T){
-
-        while (T.length() > S.length()){
-            if (T.charAt(T.length() - 1) == 'A'){
-                T.deleteCharAt(T.length() - 1);
-            } else {
-                T.deleteCharAt((T.length() - 1));
-                T.reverse();
-            }
+        for (int temp = month - 1;  temp > 0; temp--) {
+            allDays += months[temp - 1];
         }
 
-        if (T.toString().equals(S.toString())){
-            System.out.println(1);
-        } else {
-            System.out.println(0);
-        }
-    }
-
-    public static int bfs(StringBuilder S, StringBuilder T){
-
-        Queue<String> q = new LinkedList<>();
-        Set<String> visited = new HashSet<>();
-
-        q.add(T.toString());
-        visited.add(T.toString());
-
-        while (!q.isEmpty()){
-            StringBuilder cur = new StringBuilder(q.poll());
-
-            if (cur.toString().contentEquals(S)){
-                return 1;
-            }
-
-            if (cur.length() > S.length()) {
-                if (cur.charAt(cur.length() - 1) == 'A') {
-                    cur.deleteCharAt(cur.length() - 1);
-                    if (!visited.contains(cur.toString())) {
-                        visited.add(cur.toString());
-                        q.add(cur.toString());
-                    }
-                } else {
-                    cur.deleteCharAt(cur.length() - 1).reverse();
-                    if (!visited.contains(cur.toString())) {
-                        visited.add(cur.toString());
-                        q.add(cur.toString());
-                    }
-
-                }
-            }
-        }
-        return 0;
+        System.out.println(month + "월 " + day + "일은 " + allDays + "번째 날입니다.");
     }
 }
