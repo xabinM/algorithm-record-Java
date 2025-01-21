@@ -1,90 +1,74 @@
-
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        /* if 문 연습하기 */
-        // if 문은 조건식이 참(true)인 경우 Code Block (중괄호, {})에 작성된 코드를 실행하며, 거짓(false)면 실행하지 않습니다.
+    public static void main(String[] args) throws IllegalAccessException {
+        Scanner sc = new Scanner(System.in);
+        String input;
 
-        char value1 = 'b';
+        do {
+            System.out.print("60갑자를 입력하세요: ");
+            input = sc.nextLine();
 
-        // Q. value1이 'a'보다 크거나 같고 'z'보다 작거나 같은 경우 출력해 봅시다.
-        if (value1 >= 'a' && value1 <= 'z') {
-            System.out.println("value1은 소문자입니다.");
-        }
-
-        // 실행되는 코드가 1줄이라면 Code Block을 생략할 수 있습니다.
-        if (value1 >= 'a' && value1 <= 'z')
-        System.out.println("value1은 소문자입니다.");
-
-
-
-        /* if ~ else if ~ else 문 연습하기 */
-        // 사용해야하는 조건식이 여러가지인 경우 사용할 수 있는 명령문입니다.
-        // 어느 한 조건식이 만족한다면 이후 작성된 조건식은 확인하지 않습니다.
-
-        char value2 = 'B';
-
-        // Q. value2가 'a'보다 크거나 같고 'z'보다 작거나 같은 경우 출력해 봅시다.
-        if (value2 >= 'a' && value2 <= 'z') {
-            System.out.println("value2은 소문자입니다.");
-        }
-        // Q. value2이 'A'보다 크거나 같고 'Z'보다 작거나 같은 경우 출력해 봅시다.
-        else if (value2 >= 'A' && value2 <= 'Z') {
-            System.out.println("value2은 대문자입니다.");
-        }
-        // Q. value2이 'A'보다 크거나 같고 'Z'보다 작거나 같은 경우 출력해 봅시다.
-        else if (value2 >= 'A' && value2 <= 'Z') {
-            System.out.println("value2은 대문자입니다.");
-            System.out.println("이 구문은 실행이 될까요?");
-        }
-        else {
-            System.out.println("value2은 소문자도 대문자도 아닙니다.");
-        }
-
-
-
-        /* if ~ else 문 연습하기 */
-        // 사용해야하는 조건식이 1가지이면서 참과 거짓에 따라 다른 코드를 실행해야하는 경우 사용할 수 있는 명령문입니다.
-
-        char value3 = 'A';
-
-        if (!Character.isUpperCase(value3)) {
-            System.out.println("value3는 소문자입니다.");
-        }
-        else {
-            System.out.println("value3는 소문자가 아닙니다.");
-        }
-
-
-        /* 삼항 연산자 연습하기 */
-        // if ~ else 문을 보다 간결하게 사용할 수 있는 명령문입니다.
-        // [조건식] ? [참인 경우 실행되는 위치] : [거짓인 경우 실행되는 위치] 로 표현할 수 있습니다.
-
-        char value4 = 'S';
-        System.out.println("value4는 " + (value4 >= 'A' & value4 <= 'Z' ? "대문자" : "소문자") + "입니다." );
-
-
-
-        /* switch ~ case 연습하기 */
-        // 값에 따라 다른 명령을 수행하도록하는 조건문입니다.
-
-        int month = 3;
-        int day = -1;
-
-        switch (month) {
-            case 2:
-                day = 29;
+            if (input.equals("종료")) {
                 break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                day = 30;
+            }
+
+            try {
+                int startYear = getStartYear(input);
+
+                for (int resultYear = startYear; resultYear <= 2100; resultYear+=60) {
+                    if (resultYear < 1800) {
+                        continue;
+                    }
+                    System.out.print(resultYear + " ");
+                }
+                System.out.println();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    private static int getStartYear(String input) {
+        List<String> tenHeavenlyStems = List.of("갑", "을", "병", "정", "무", "기", "경", "신", "임", "계");
+        List<String> twelveEarthlyBranches = List.of("자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해");
+
+        int startYear = 0;
+
+        int ten = -1;
+        int twelve = -1;
+
+        for (int i = 0; i < 10; i++) {
+            if (input.contains(tenHeavenlyStems.get(i))) {
+                ten = i;
                 break;
-            default:
-                day = 31;
+            }
+        }
+        for (int i = 0; i < 12; i++) {
+            if (input.contains(twelveEarthlyBranches.get(i))) {
+                twelve = i;
+                break;
+            }
         }
 
-        System.out.println(month + "월 달은 " + day + "일 입니다.");
+        if (ten == -1 || twelve == -1) {
+            throw new IllegalArgumentException("잘못된 입력");
+        }
+
+        if (ten < twelve) {
+            twelve -= 12;
+        }
+
+        int n = ten - twelve;
+        if (n == 0) {
+            startYear = twelve;
+        } else {
+            startYear = 12 * (n/2) + twelve;
+        }
+
+        startYear += 1744;
+        return startYear;
     }
 }
+
