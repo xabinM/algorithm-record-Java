@@ -2,89 +2,163 @@ package SSAFY;
 
 public class Operator {
     public static void main(String[] args) {
-        /* if 문 연습하기 */
-        // if 문은 조건식이 참(true)인 경우 Code Block (중괄호, {})에 작성된 코드를 실행하며, 거짓(false)면 실행하지 않습니다.
+        /* 대입 연산자 연습하기 */
 
-        char value1 = 'b';
-
-        // Q. value1이 'a'보다 크거나 같고 'z'보다 작거나 같은 경우 출력해 봅시다.
-        if (value1 >= 'a' && value1 <= 'z') {
-            System.out.println("value1은 소문자입니다.");
-        }
-
-        // 실행되는 코드가 1줄이라면 Code Block을 생략할 수 있습니다.
-        if (value1 >= 'a' && value1 <= 'z')
-            System.out.println("value1은 소문자입니다.");
+        // Q. int형 value1에 8 int형 value2에 4를 저장해 봅시다.
+        int value1 = 8;
+        int value2 = 4;
+        System.out.println("value1: " + value1 + ", value2: " + value2);
+        System.out.println("-----------------------------------");
 
 
 
-        /* if ~ else if ~ else 문 연습하기 */
-        // 사용해야하는 조건식이 여러가지인 경우 사용할 수 있는 명령문입니다.
-        // 어느 한 조건식이 만족한다면 이후 작성된 조건식은 확인하지 않습니다.
+        /* 산술 연산자 연습하기 */
 
-        char value2 = 'B';
+        // Q. int형 result 변수를 선언해 봅시다.
+        int result = 0;
 
-        // Q. value2가 'a'보다 크거나 같고 'z'보다 작거나 같은 경우 출력해 봅시다.
-        if (value2 >= 'a' && value2 <= 'z') {
-            System.out.println("value2은 소문자입니다.");
-        }
-        // Q. value2이 'A'보다 크거나 같고 'Z'보다 작거나 같은 경우 출력해 봅시다.
-        else if (value2 >= 'A' && value2 <= 'Z') {
-            System.out.println("value2은 대문자입니다.");
-        }
-        // Q. value2이 'A'보다 크거나 같고 'Z'보다 작거나 같은 경우 출력해 봅시다.
-        else if (value2 >= 'A' && value2 <= 'Z') {
-            System.out.println("value2은 대문자입니다.");
-            System.out.println("이 구문은 실행이 될까요?");
-        }
-        else {
-            System.out.println("value2은 소문자도 대문자도 아닙니다.");
-        }
+        // Q. value1과 value2를 더한 결과를 result에 저장해 봅시다.
+        result = value1 + value2;
+        System.out.println("value1과 value2를 더한 결과 : " + result);
 
+        // Q. value1에 value2를 뺀 결과를 result에 저장해 봅시다.
+        result = value1 - value2;
+        System.out.println("value1에 value2를 뺀 결과 : " + result);
 
+        // Q. value1과 value2를 곱한 결과를 result에 저장해 봅시다.
+        result = value1 * value2;
+        System.out.println("value1과 value2를 곱한 결과 : " + result);
 
-        /* if ~ else 문 연습하기 */
-        // 사용해야하는 조건식이 1가지이면서 참과 거짓에 따라 다른 코드를 실행해야하는 경우 사용할 수 있는 명령문입니다.
+        // Q. value1에 value2를 나눈 몫을 result에 저장해 봅시다.
+        result = value1 / value2;
+        System.out.println("value1에 value2를 나눈 몫 : " + result);
 
-        char value3 = 'A';
+        // Q. value1에 value2를 나눈 나머지를 result에 저장해 봅시다.
+        result = value1 % value2;
+        System.out.println("value1에 value2를 나눈 나머지 : " + result);
 
-        if (!Character.isUpperCase(value3)) {
-            System.out.println("value3는 소문자입니다.");
-        }
-        else {
-            System.out.println("value3는 소문자가 아닙니다.");
-        }
-
-
-        /* 삼항 연산자 연습하기 */
-        // if ~ else 문을 보다 간결하게 사용할 수 있는 명령문입니다.
-        // [조건식] ? [참인 경우 실행되는 위치] : [거짓인 경우 실행되는 위치] 로 표현할 수 있습니다.
-
-        char value4 = 'S';
-        System.out.println("value4는 " + (value4 >= 'A' & value4 <= 'Z' ? "대문자" : "소문자") + "입니다." );
+        System.out.println("-----------------------------------");
 
 
 
-        /* switch ~ case 연습하기 */
-        // 값에 따라 다른 명령을 수행하도록하는 조건문입니다.
+        /* 복합 대입 연산자 연습하기 */
 
-        int month = 3;
-        int day = -1;
+        // Q. value1에 1을 더한 후 그 결과를 출력해 봅시다.
+        value1 += 1;
+        System.out.println("value1에 1을 더하고 대입한 결과: " + value1);
 
-        switch (month) {
-            case 2:
-                day = 29;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                day = 30;
-                break;
-            default:
-                day = 31;
-        }
+        // Q. value1에 2를 뺀 후 그 결과를 출력해 봅시다.
+        value1 -= 2;
+        System.out.println("value1에 2를 뺀 후 대입한 결과: " + value1);
 
-        System.out.println(month + "월 달은 " + day + "일 입니다.");
+        // Q. value1에 오른쪽의 정수 3을 곱한 후 그 결과를 출력해 봅시다.
+        value1 *= 3;
+        System.out.println("value1에 3을 곱한 후 대입한 결과 : " + value1);
+
+        // Q. value1에 오른쪽의 정수 4를 나눈 후 그 결과를 출력해 봅시다.
+        value1 /= 4;
+        System.out.println("value1에 4를 나눈 몫을 대입한 결과 : " + value1);
+
+        System.out.println("-----------------------------------");
+
+
+
+        /* 증감 연산자 연습하기 */
+
+        // Q. 먼저 value2를 1 증가시킨 후에 4를 더한 결과를 result에 저장해 봅시다.
+        result = ++value2 + 4;
+        System.out.println("먼저 value2를 1 증가시킨 후에 4를 더한 결과 : " + result);
+
+        // Q. 먼저 4를 더하고 나서, value2의 값을 1 증가시킴
+        result = value2++ + 4;
+        System.out.println("먼저 4를 더하고 나서 value2의 값을 1 증가시킴 : " + result);
+
+        // Q. 먼저 value2를 1 감소시킨 후에 3을 뺀 결과를 출력
+        result = --value2 - 3;
+        System.out.println("먼저 value2를 1 감소시킨 후에 3을 뺀 결과 : " + result);
+
+        // Q. 먼저 3을 빼고 나서, value2의 값을 1 감소시킴
+        result = value2-- - 3;
+        System.out.println("먼저 3을 빼고 나서 value2의 값을 1 감소시킴 : " + result);
+
+        System.out.println("-----------------------------------");
+
+
+
+        /* 비교 연산자 연습하기 */
+
+        // Q. int형 value3에 5를 int형 value4에 5을 저장해 봅시다.
+        int value3 = 5;
+        int value4 = 5;
+
+        // Q. true, false 결과를 저장하기 위한 result2 변수를 선언해 봅시다.
+        boolean result2 = false;
+
+        // Q. value3과 value4가 동일한지 확인해 봅시다.
+        result2 = value3 == value4;
+        System.out.println("value3과 value4가 동일한가요? " + result2);
+
+        // Q. value3과 value4가 다른지 확인해 봅시다.
+        result2 = value3 != value4;
+        System.out.println("value3과 value4가 다른가요? " + result2);
+
+        // Q. value3이 value4보다 큰지 확인해 봅시다.
+        result2 = value3 > value4;
+        System.out.println("value3이 value4보다 큰가요? " + result2);
+
+        // Q. value3이 value4보다 크거나 같은지 확인해 봅시다.
+        result2 = value3 >= value4;
+        System.out.println("value3이 value4보다 크거나 같나요? " + result2);
+
+        System.out.println("-----------------------------------");
+
+
+
+
+        /* 비트 연산자 연습하기 */
+        // Q. int형 value5에 20를 int형 value6에 30을 저장해 봅시다.
+        int value5 = 20;
+        int value6 = 30;
+
+        // Q. value5와 value6을 AND 연산해 봅시다.
+        System.out.println("value5의 2진수: " + Integer.toBinaryString(value5));
+        System.out.println("value6의 2진수: " + Integer.toBinaryString(value6));
+        System.out.println("value5 AND value6 2진수: " + Integer.toBinaryString(value5 & value6));
+
+        // Q. value5와 value6을 OR 연산해 봅시다.
+        System.out.println("value5 OR value6 2진수: " + Integer.toBinaryString(value5 | value6));
+
+        // Q. value5와 value6을 XOR 연산해 봅시다.
+        System.out.println("value5 XOR value6 2진수: " + Integer.toBinaryString(value5 ^ value6));
+
+        // Q. value5와 value6을 NOT 연산해 봅시다.
+        System.out.println("value5 NOT 2진수: " + Integer.toBinaryString(~value5));
+        System.out.println("value6 NOT 2진수: " + Integer.toBinaryString(~value6));
+
+        // Q. value5를 왼쪽으로 1칸씩 비트를 옮겨봅시다.
+        System.out.println("value5 LEFT SHIFT 1 2진수: " + Integer.toBinaryString(value5 << 1));
+
+        // Q. value5를 오른쪽으로 1칸씩 비트를 옮겨봅시다.
+        System.out.println("value5 RIGHT SHIFT 1 2진수: " + Integer.toBinaryString(value5 >> 1));
+
+        System.out.println("-----------------------------------");
+
+
+        /* 논리 연산자 연습하기 */
+
+        int value7 = 10;
+        int value8 = 20;
+
+        // Q. value7의 값과 value8의 값을 생각해 봅시다.
+        System.out.println( (value7 += 10) > 15 | (value8 -= 10) > 15 );
+        System.out.println("예측: value7은 20 이고, value8은 10입니다.");
+        System.out.println("정답: value7은 " + value7 + "이고, value8은 " + value8);
+
+        // Q. value7의 값과 value8의 값을 생각해 봅시다.
+        value7 = 10;
+        value8 = 20;
+        System.out.println( (value7 += 10) > 15 || (value8 -= 10) > 15 );
+        System.out.println("예측: value7은 20 이고, value8은 20입니다.");
+        System.out.println("정답: value7은 " + value7 + "이고, value8은 " + value8);
     }
 }
