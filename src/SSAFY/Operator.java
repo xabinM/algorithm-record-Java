@@ -1,6 +1,6 @@
+package SSAFY;
 
-
-public class Main {
+public class Operator {
     public static void main(String[] args) {
         /* if 문 연습하기 */
         // if 문은 조건식이 참(true)인 경우 Code Block (중괄호, {})에 작성된 코드를 실행하며, 거짓(false)면 실행하지 않습니다.
@@ -14,7 +14,7 @@ public class Main {
 
         // 실행되는 코드가 1줄이라면 Code Block을 생략할 수 있습니다.
         if (value1 >= 'a' && value1 <= 'z')
-        System.out.println("value1은 소문자입니다.");
+            System.out.println("value1은 소문자입니다.");
 
 
 
