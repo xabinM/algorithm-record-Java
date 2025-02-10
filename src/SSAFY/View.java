@@ -1,7 +1,6 @@
 package SSAFY;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,12 +18,13 @@ public class View {
 
             int result = 0;
             for (int j = 2; j < (N - 2); j++) {
-                List<Integer> temp = new ArrayList<>();
-                Collections.addAll(temp, arr.get(j - 2), arr.get(j - 1), arr.get(j + 1), arr.get(j + 2));
-                temp.sort(null);
+                int maxNeighbor = Math.max(
+                        Math.max(arr.get(j - 2), arr.get(j - 1))
+                        , Math.max(arr.get(j + 1), arr.get(j + 2))
+                );
 
-                if (temp.get(3) < arr.get(j)) {
-                    result += arr.get(j) - temp.get(3);
+                if (maxNeighbor < arr.get(j)) {
+                    result += arr.get(j) - maxNeighbor;
                 }
             }
 
