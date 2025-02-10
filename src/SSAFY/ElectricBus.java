@@ -23,6 +23,10 @@ public class ElectricBus {
             sc.nextLine();
 
 
+
+
+
+
         }
     }
 }
