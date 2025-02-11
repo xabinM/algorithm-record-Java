@@ -1,4 +1,4 @@
-package SSAFY;
+package SSAFY.배열;
 
 import java.util.Scanner;
 
