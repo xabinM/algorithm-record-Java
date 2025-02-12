@@ -56,7 +56,7 @@ public class Palindrome2 {
     private static boolean checkPalindrome(String str) {
         String[] strArr = str.split("");
 
-        for (int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < (str.length() / 2); i++) {
             if (!strArr[i].equals(strArr[str.length() - 1 - i])) {
                 return false;
             }
