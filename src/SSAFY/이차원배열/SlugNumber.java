@@ -1,9 +1,8 @@
-package SSAFY.배열;
+package SSAFY.이차원배열;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class SlugNumber {
     public static void main(String[] args) throws IOException {

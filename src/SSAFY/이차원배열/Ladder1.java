@@ -1,4 +1,4 @@
-package SSAFY.배열;
+package SSAFY.이차원배열;
 
 import java.io.*;
 
