@@ -27,26 +27,26 @@ public class KillFlies2 {
             int result = Integer.MIN_VALUE;
             for (int i = 0; i < N; i++) {
                 for (int j = 0 ; j < N; j++) {
-                    int maxC = graph[i][j];
-                    int maxX = graph[i][j];
+                    int sumC = graph[i][j];
+                    int sumX = graph[i][j];
                     for (int c = 0; c < 8; c++) {
                         for (int k = 1; k < M; k++) {
-                            if (c < 4) {
-
-                            } else {
-
-                            }
                             int nx = i + dx[c] * k;
                             int ny = j + dy[c] * k;
-
+                            if (nx >= 0 && nx < N && ny >= 0 && ny < N){
+                                if (c < 4) {
+                                    sumC += graph[nx][ny];
+                                } else {
+                                    sumX += graph[nx][ny];
+                                }
+                            }
                         }
-//                            if (i + k != 0 && j + k != 0 && i -){
-//                                maxC += graph[i + k][j] + graph[i][j + k] + graph[i - k][j] + graph[i][j - k];
-//                                maxX += graph[i + k][j + k] + graph[i + k][j - k] + graph[i - k][j + k] + graph[i - k][j - k];
-//                            }
+                    result = Math.max(result, Math.max(sumC, sumX));
                     }
                 }
             }
+
+            System.out.println("#" + t + " " + result);
         }
     }
 }

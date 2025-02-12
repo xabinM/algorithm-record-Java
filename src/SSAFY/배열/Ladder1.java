@@ -10,7 +10,7 @@ public class Ladder1 {
 
         try (BufferedReader br = new BufferedReader(new FileReader("resource/input.txt"))) {
 
-            for (int t = 0; t < TEST_CASE; t++){
+            for (int t = 0; t < TEST_CASE; t++) {
                 int T = Integer.parseInt(br.readLine());
 
                 int[][] graph = new int[ARRAY_RANGE][ARRAY_RANGE];
@@ -25,7 +25,7 @@ public class Ladder1 {
                     if (graph[0][i] == 1) {
                         int[] arrival = search(graph, 0, i);
 
-                        if (graph[arrival[0]][arrival[1]] == 2 ) {
+                        if (graph[arrival[0]][arrival[1]] == 2) {
 
                             System.out.println("#" + T + " " + i);
                         }
@@ -45,15 +45,15 @@ public class Ladder1 {
         int curX = startX;
         int curY = startY;
 
-        while (curX < ARRAY_RANGE - 1){
+        while (curX < ARRAY_RANGE - 1) {
             // 한칸 내려가
             curX += 1;
 
-            if (curY - 1 >= 0 && graph[curX][curY - 1] == 1){
+            if (curY - 1 >= 0 && graph[curX][curY - 1] == 1) {
                 while (curY - 1 >= 0 && graph[curX][curY - 1] == 1) {
                     curY -= 1;
                 }
-            } else if (curY + 1 < ARRAY_RANGE && graph[curX][curY + 1] == 1){
+            } else if (curY + 1 < ARRAY_RANGE && graph[curX][curY + 1] == 1) {
                 while (curY + 1 < ARRAY_RANGE && graph[curX][curY + 1] == 1) {
                     curY += 1;
                 }
