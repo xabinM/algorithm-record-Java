@@ -22,16 +22,13 @@ public class CropsHarvest {
 
             int centerIdx = N / 2;
             int result = 0;
-            for (int i = 0; i <= (N / 2); i++) {
-                result += graph[i][centerIdx];
-                for (int j = 1; j <= i; j++) {
-                    result += graph[i][centerIdx + j] + graph[i][centerIdx - j];
-                }
-            }
-            for (int i = (N / 2) + 1; i < N; i++) {
-                result += graph[i][centerIdx];
-                for (int j = (N - 1) - i; j > 0; j--) {
-                    result += graph[i][centerIdx + j] + graph[i][centerIdx - j];
+
+            for (int i = 0; i < N; i++) {
+                int start = Math.abs(centerIdx - i);
+                int end = N - start - 1;
+
+                for (int j = start; j <= end; j++) {
+                    result += graph[i][j];
                 }
             }
 
@@ -39,4 +36,3 @@ public class CropsHarvest {
         }
     }
 }
-
