@@ -1,6 +1,5 @@
 package SSAFY;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Simple369Game {
@@ -28,9 +27,7 @@ public class Simple369Game {
                     result.append(string);
                 }
             } else {
-                for (int j = 0; j < cnt369; j++) {
-                    result.append("-");
-                }
+                result.append("-".repeat(Math.max(0, cnt369)));
             }
             System.out.print(result + " ");
         }
