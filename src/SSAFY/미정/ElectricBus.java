@@ -1,4 +1,4 @@
-package SSAFY;
+package SSAFY.미정;
 
 import java.util.ArrayList;
 import java.util.List;

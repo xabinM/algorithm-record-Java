@@ -1,4 +1,4 @@
-package SSAFY;
+package SSAFY.미정;
 
 public class Operator {
     public static void main(String[] args) {

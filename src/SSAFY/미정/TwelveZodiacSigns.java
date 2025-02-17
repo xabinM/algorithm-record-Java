@@ -1,4 +1,4 @@
-package SSAFY;
+package SSAFY.미정;
 
 import java.util.List;
 import java.util.Scanner;
