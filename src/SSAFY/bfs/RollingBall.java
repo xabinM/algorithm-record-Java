@@ -1,4 +1,4 @@
-package bfs;
+package SSAFY.bfs;
 
 import java.util.Scanner;
 
