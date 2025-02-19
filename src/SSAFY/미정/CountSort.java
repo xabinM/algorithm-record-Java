@@ -25,13 +25,11 @@ public class CountSort {
             for (int i = 0; i < N; i++) {
                 cnt[arr[i]] += 1;
             }
-            System.out.println(Arrays.toString(cnt));
 
             //누적합
             for (int i = 1; i <= arrMaxValue; i++) {
                 cnt[i] += cnt[i - 1];
             }
-            System.out.println(Arrays.toString(cnt));
 
             // 정렬
             int[] result = new int[N];
@@ -41,7 +39,11 @@ public class CountSort {
                 cnt[value]--;
             }
 
-            System.out.println(Arrays.toString(result));
+            System.out.print("#" + t + " ");
+            for (int value : result) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
         }
     }
 }
