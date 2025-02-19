@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SumArray {
     public static void main(String[] args) throws IOException {
@@ -18,32 +19,33 @@ public class SumArray {
             // 수열의 개수
             int M = Integer.parseInt(input[1]);
 
-            LinkedList<Integer> result = new LinkedList<>();
+            LinkedList<Integer> result = Arrays.stream(br.readLine().split(" ")).
+                    map(Integer::parseInt).
+                    collect(Collectors.toCollection(LinkedList::new));
 
-            for (int i = 0; i < M; i++){
+            for (int i = 0; i < M - 1; i++){
                 List<Integer> temp = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt).toList();
 
                 boolean flag = true;
 
-                if (result.isEmpty()) {
-                    result.addAll(temp);
-                } else {
-                    for (int value : result) {
-                        if (value > temp.getFirst()) {
-                            int idx = result.indexOf(value);
-                            for (int j = 0; j < temp.size(); j++) {
-                                result.add(idx + j, temp.get(j));
-                            }
-                            flag = false;
-                            break;
+                for (int value : result) {
+                    if (value > temp.getFirst()) {
+                        int idx = result.indexOf(value);
+
+
+                        for (int j = 0; j < temp.size(); j++) {
+                            result.add(idx + j, temp.get(j));
                         }
-                    }
-                    if (flag){
-                        for (int value : temp) {
-                            result.addLast(value);
-                        }
+                        flag = false;
+                        break;
                     }
                 }
+                if (flag){
+                    for (int value : temp) {
+                        result.addLast(value);
+                    }
+                }
+
             }
             int resultSize = result.size();
 
