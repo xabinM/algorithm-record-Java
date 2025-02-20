@@ -15,7 +15,6 @@ public class SubTree {
             int N = sc.nextInt();
 
             int[] childArr = new int[E + 2];
-//            int[] parentArr = new int[E + 2];
 
             for (int i = 0; i < E; i++) {
                 int parent = sc.nextInt();
@@ -37,7 +36,6 @@ public class SubTree {
         }
     }
 
-
     private static void count(int[] childArr, int cur, int idx) {
         if (cur != 0) {
             cur = idx;
@@ -50,3 +48,17 @@ public class SubTree {
         }
     }
 }
+
+//    private void inorder()
+//    {
+//        //탈출시 값읗 넣어주고
+//        if()
+//        {
+//            9/6-4
+//        }0
+//        inorder();
+//        //
+//        inorder();
+//        //계산을 해준다. ( 스택에서 2만꺼내서
+//
+//    }
