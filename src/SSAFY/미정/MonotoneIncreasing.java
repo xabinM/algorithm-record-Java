@@ -1,6 +1,6 @@
 package SSAFY.미정;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class MonotoneIncreasing {
     public static void main(String[] args) {
@@ -11,22 +11,38 @@ public class MonotoneIncreasing {
         for (int t = 1; t <= T; t++) {
             int N = sc.nextInt();
 
-            int[] arr = new int[N];
+            List<Integer> numbers = new ArrayList<>();
             for (int i = 0; i < N; i++) {
-                arr[i] = sc.nextInt();
+                numbers.add(sc.nextInt());
             }
+//            System.out.println("원본 리스트! : " + numbers);
 
-            for (int i = 0; i < N; i++) {
-                int max = 0;
-                for (int j = i; j < N; j++) {
-                    if (arr[j] > arr[j + 1]) {
-                        System.out.println("#" + t + " " + -1);
-
-                    } else {
-
+            int maxValue = -1;
+            for (int i = 0; i < N - 1; i++) {
+                for (int j = i + 1; j < N; j++) {
+                    int number = numbers.get(i) * numbers.get(j);
+                    if (isMonotoneIncreasing(number)) {
+                        if (number > maxValue) {
+                            maxValue = number;
+                        }
                     }
                 }
             }
+
+//            System.out.println("곱한 값들! : " + multiply);
+
+
+            System.out.println("#" + t + " " + maxValue);
         }
+    }
+
+    private static boolean isMonotoneIncreasing(int number) {
+        char[] digits = String.valueOf(number).toCharArray();
+        for (int i = 0; i < digits.length - 1; i++) {
+            if (digits[i] > digits[i + 1]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
