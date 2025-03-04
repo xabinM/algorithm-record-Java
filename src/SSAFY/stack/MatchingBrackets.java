@@ -1,4 +1,4 @@
-package SSAFY.미정;
+package SSAFY.stack;
 
 import java.io.BufferedReader;
 import java.io.IOException;
