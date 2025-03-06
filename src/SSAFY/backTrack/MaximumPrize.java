@@ -1,4 +1,4 @@
-package SSAFY.미정;
+package SSAFY.backTrack;
 
 import java.util.*;
 import java.util.stream.Collectors;
