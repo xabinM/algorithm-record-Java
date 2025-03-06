@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 
 public class MaximumPrize {
     private static int repeat;
-    private static Set<Integer> result;
+    private static int maxValue;
+    private static Set<String> visited;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -20,11 +21,10 @@ public class MaximumPrize {
                     collect(Collectors.toCollection(LinkedList::new));
             repeat = Integer.parseInt(input[1]);
 
-            result = new HashSet<>();
+            visited = new HashSet<>();
+            maxValue = Integer.MIN_VALUE;
 
             backTrack(origin, 0, 0);
-
-            int maxValue = Collections.max(result);
 
             System.out.println("#" + t + " " + maxValue);
         }
@@ -32,9 +32,16 @@ public class MaximumPrize {
 
     private static void backTrack(List<String> temp, int idx, int depth) {
         if (depth == repeat) {
-            result.add(translate(temp));
+            maxValue = Math.max(maxValue, translate(temp));
             return;
         }
+
+        // 중복 체크
+        String state = String.join("", temp) + "-" + depth;
+        if (visited.contains(state)) {
+            return;
+        }
+        visited.add(state);
 
         for (int i = idx; i < temp.size() - 1; i++) {
             for (int j = i + 1; j < temp.size(); j++) {
