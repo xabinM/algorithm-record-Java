@@ -27,17 +27,15 @@ public class GatherEnergy {
     private static void backTrack(List<Integer> arr, int weight) {
         if (arr.size() <= 2) {
             maxEnergy = Math.max(maxEnergy, weight);
+            return;
         }
 
         for (int i = 1; i < arr.size() - 1; i++) {
             int temp = arr.get(i);
             weight += arr.get(i - 1) * arr.get(i + 1);
-            System.out.println("1 : " + arr);
             arr.remove(i);
-            System.out.println("2 : " + arr);
             backTrack(arr, weight);
-            arr.set(i, temp);
-            System.out.println("3 : " + arr);
+            arr.add(i, temp);
             weight -= arr.get(i - 1) * arr.get(i + 1);
         }
     }
