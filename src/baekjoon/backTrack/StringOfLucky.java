@@ -1,60 +1,58 @@
 package baekjoon.backTrack;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
 
 public class StringOfLucky {
     private static String[] input;
     private static int N;
     private static boolean[] visited;
-    private static Set<String> result;
+    private static int cnt;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         input = sc.nextLine().split("");
+        Arrays.sort(input);
         N = input.length;
         visited = new boolean[N];
-        result = new HashSet<>();
+        cnt = 0;
 
         backTrack(0, new StringBuilder());
 
-        System.out.println(result.size());
+        System.out.println(cnt);
+
     }
 
     private static void backTrack(int depth, StringBuilder sb) {
         if (depth == N) {
-            if (checkNextChar(sb)) {
-                result.add(sb.toString());
+            if (checkNextChar(sb)){
+                cnt++;
             }
-            return;
-        }
-
-        if (!checkNextChar(sb)) {
             return;
         }
 
         for (int i = 0; i < N; i++) {
-            if (!visited[i]){
-                sb.append(input[i]);
-                visited[i] = true;
-                backTrack(depth + 1, sb);
-                sb.deleteCharAt(sb.length() - 1);
-                visited[i] = false;
+            if (visited[i]) {
+                continue;
             }
-        }
+            if (i > 0 && input[i].equals(input[i - 1]) && !visited[i - 1]){
+               continue;
+            }
+            sb.append(input[i]);
+            visited[i] = true;
+            backTrack(depth + 1, sb);
+            visited[i] = false;
+            sb.deleteCharAt(sb.length() - 1);
+            }
     }
 
     private static boolean checkNextChar(StringBuilder sb) {
-        boolean flag = true;
-        String[] temp = sb.toString().split("");
         for (int i = 0; i < sb.length() - 1; i++) {
-            if (temp[i].equals(temp[i + 1])) {
-                flag = false;
-                break;
+            if (sb.charAt(i) == sb.charAt(i + 1)) {
+                return false; // 연속된 문자 발견
             }
         }
-        return flag;
+        return true;
     }
 }
