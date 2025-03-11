@@ -5,7 +5,7 @@ import java.util.*;
 public class BiggerAndSmallest {
     private static int origin;
     private static int[] input;
-    private static int leng;
+    private static int len;
     private static boolean[] visited;
     private static int minValue;
 
@@ -17,8 +17,8 @@ public class BiggerAndSmallest {
         input = Arrays.stream(String.valueOf(origin).split("")).
                 mapToInt(Integer::parseInt).
                 toArray();
-        leng = input.length;
-        visited = new boolean[leng];
+        len = input.length;
+        visited = new boolean[len];
         minValue = Integer.MAX_VALUE;
 
         backTrack(new StringBuilder(), 0, false);
@@ -32,7 +32,7 @@ public class BiggerAndSmallest {
     }
 
     private static void backTrack(StringBuilder sb, int depth, boolean alreadyBigger) {
-        if (depth == leng) {
+        if (depth == len) {
             int target = Integer.parseInt(sb.toString());
             if (target > origin) {
                 minValue = Math.min(minValue, Integer.parseInt(sb.toString()));
@@ -40,7 +40,7 @@ public class BiggerAndSmallest {
             return;
         }
 
-        for (int i = 0; i < leng; i++) {
+        for (int i = 0; i < len; i++) {
             if (visited[i]) continue;
 
             if (input[i] > input[depth]) {
