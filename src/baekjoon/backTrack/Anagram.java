@@ -1,12 +1,10 @@
 package baekjoon.backTrack;
 
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Anagram {
     private static int N;
-    private static Set<String> result;
     private static String[] splited;
     private static int len;
     private static boolean[] visited;
@@ -18,32 +16,32 @@ public class Anagram {
 
         for (int i = 0; i < N; i++) {
             splited = sc.next().split("");
+            Arrays.sort(splited);
             len = splited.length;
             visited = new boolean[len];
-            result = new TreeSet<>();
 
             backTrack(new StringBuilder(), 0);
-
-            for (String value : result) {
-                System.out.println(value);
-            }
         }
     }
 
     private static void backTrack(StringBuilder sb, int depth) {
         if (depth == len) {
-            result.add(sb.toString());
+            System.out.println(sb.toString());
             return;
         }
 
+        String lastUsed =  null;
         for (int i = 0; i < len; i++) {
-            if (!visited[i]){
-                sb.append(splited[i]);
-                visited[i] = true;
-                backTrack(sb, depth + 1);
-                visited[i] = false;
-                sb.deleteCharAt(sb.length() - 1);
-            }
+            if (visited[i]) continue;
+
+            if (splited[i].equals(lastUsed)) continue;
+
+            sb.append(splited[i]);
+            visited[i] = true;
+            lastUsed = splited[i];
+            backTrack(sb, depth + 1);
+            visited[i] = false;
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 }
