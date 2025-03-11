@@ -3,7 +3,7 @@ package baekjoon.backTrack;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Anagram {
+public class Anagram6443 {
     private static int N;
     private static String[] splited;
     private static int len;

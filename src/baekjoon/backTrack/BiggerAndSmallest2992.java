@@ -2,7 +2,7 @@ package baekjoon.backTrack;
 
 import java.util.*;
 
-public class BiggerAndSmallest {
+public class BiggerAndSmallest2992 {
     private static int origin;
     private static int[] input;
     private static int len;

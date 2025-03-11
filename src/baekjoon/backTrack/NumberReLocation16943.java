@@ -2,7 +2,7 @@ package baekjoon.backTrack;
 
 import java.util.Scanner;
 
-public class ReLocation {
+public class NumberReLocation16943 {
     private static int A;
     private static int B;
     private static String[] arr;

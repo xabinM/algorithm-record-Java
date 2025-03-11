@@ -3,7 +3,7 @@ package baekjoon.backTrack;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class StringOfLucky {
+public class StringOfLucky1342 {
     private static String[] input;
     private static int N;
     private static boolean[] visited;

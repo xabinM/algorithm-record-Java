@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class GatherEnergy {
+public class GatherEnergy16198 {
     private static int maxEnergy;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
