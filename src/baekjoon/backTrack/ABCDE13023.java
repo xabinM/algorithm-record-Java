@@ -3,28 +3,63 @@ package baekjoon.backTrack;
 import java.util.*;
 
 public class ABCDE13023 {
-    private static int N;
-    private static int M;
-    private static List<int[]> relationship;
+    private static final List<List<Integer>> relationship = new ArrayList<>();
     private static boolean[] visited;
-
+    private static int result;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        N = sc.nextInt();
-        M = sc.nextInt();
-        sc.nextLine();
+        int N = sc.nextInt();
+        int M = sc.nextInt();
 
-        relationship = new ArrayList<>();
-        for (int i = 0; i < M; i++) {
-            relationship.add(Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray());
+        result = 0;
+
+        for (int i = 0; i < N; i++) {
+            relationship.add(new ArrayList<>());
         }
 
-        visited = new boolean[M];
+        for (int i = 0; i < M; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            addRelationship(a, b);
+        }
 
-        // 친구 연결 체인이 있어야함 인덱스가 사람이고 밸류가 연결된 친구, 근데 친구가 여러명일 수 있음. 자료 구조를 뭘써야할지 정해야댐
+        visited = new boolean[N];
+
+        for (int i = 0; i < N; i++) {
+            visited[i] = true;
+            dfs(0, i);
+            visited[i] = false;
+            if (result == 1) {
+                break;
+            }
+        }
+        System.out.println(result);
     }
 
+    private static void dfs(int depth, int idx) {
+        if (depth >= 4) {
+            result = 1;
+            return;
+        }
 
+        if (result == 1) {
+            return;
+        }
+
+        List<Integer> cur = relationship.get(idx);
+        for (Integer i : cur) {
+            if (!visited[i]) {
+                visited[i] = true;
+                dfs(depth + 1, i);
+                visited[i] = false;
+            }
+        }
+    }
+
+    private static void addRelationship(int a, int b) {
+        relationship.get(a).add(b);
+        relationship.get(b).add(a);
+    }
 }
