@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.Scanner;
 
-public class baek16493 {
+public class MaxNumberOfPage16493 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
