@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.backTrack;
 
 import java.util.Scanner;
 

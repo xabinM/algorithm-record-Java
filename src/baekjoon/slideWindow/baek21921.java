@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.slideWindow;
 
 import java.util.ArrayList;
 import java.util.Scanner;
