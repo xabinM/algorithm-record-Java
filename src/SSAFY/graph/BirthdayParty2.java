@@ -42,11 +42,13 @@ public class BirthdayParty2 {
         }
 
         for (int friend : graph[curMan]) {
-            if (!invited[friend]) {
-                invited[friend] = true;
-                result++;
+            if (friend != 0){
+                if (!invited[friend]) {
+                    invited[friend] = true;
+                    result++;
+                }
+                dfs(friend, depth + 1);
             }
-            dfs(friend, depth + 1);
         }
     }
 }
