@@ -2,7 +2,7 @@ package baekjoon.backTrack;
 
 import java.util.Scanner;
 
-public class baek10819 {
+public class MaxDifference10819 {
     static int[] arr;
     static boolean[] visited;
     static int maxValue = 0;
