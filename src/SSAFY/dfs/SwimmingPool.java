@@ -1,4 +1,4 @@
-package SSAFY.미정;
+package SSAFY.dfs;
 
 import java.util.Arrays;
 import java.util.Scanner;
