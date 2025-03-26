@@ -1,4 +1,4 @@
-package SSAFY.bfs;
+package baekjoon.bfs;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
