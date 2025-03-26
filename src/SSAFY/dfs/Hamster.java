@@ -24,8 +24,9 @@ public class Hamster {
 
             record = new int[M][3];
             for (int i = 0; i < M; i++) {
-                record[i] = Arrays.stream(sc.nextLine().split(" ")).
-                        mapToInt(Integer::parseInt).toArray();
+                record[i] = Arrays.stream(sc.nextLine().split(" "))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
             }
 
             maxCheck = Integer.MIN_VALUE;
@@ -49,14 +50,16 @@ public class Hamster {
     }
 
     private static void backTrack(StringBuilder sb, int depth) {
+        if (!checkCondition(sb)) {
+            return;
+        }
+
         if (depth == N) {
-            if (checkCondition(sb)) {
-                if (sumOfSB(sb) > maxCheck) {
-                    maxCheck = sumOfSB(sb);
-                    result = new StringBuilder(sb);     // new StringBuilder 를 만들지 않고 그냥 sb를 할당할시 sb가 변경되면 result에 변경된 값이 담긴다.
-                } else if (sumOfSB(sb) == maxCheck) {
-                    result = orderByDictionary(result, sb);
-                }
+            if (sumOfSB(sb) > maxCheck) {
+                maxCheck = sumOfSB(sb);
+                result = new StringBuilder(sb);     // new StringBuilder 를 만들지 않고 그냥 sb를 할당할시 sb가 변경되면 result에 변경된 값이 담긴다.
+            } else if (sumOfSB(sb) == maxCheck) {
+                result = orderByDictionary(result, sb);
             }
             return;
         }
@@ -68,28 +71,16 @@ public class Hamster {
         }
     }
 
-    private static StringBuilder orderByDictionary(StringBuilder sb1, StringBuilder sb2) {
-        String a = sb1.toString();
-        String b = sb2.toString();
-
-        String[] arr = {a, b};
-
-        Arrays.sort(arr);
-
-        return new StringBuilder(arr[0]);
-    }
-
-    private static int sumOfSB(StringBuilder sb) {
-        return Arrays.stream(sb.toString().split("")).
-                mapToInt(Integer::parseInt).sum();
-    }
-
     private static boolean checkCondition(StringBuilder sb)  {
         for (int[] condition : record) {
             int l = condition[0];
             int r = condition[1];
             int s = condition[2];
             int temp = 0;
+
+            if (sb.length() < r) {
+                continue;
+            }
 
             for (int i = l - 1; i < r; i++) {
                 temp += Integer.parseInt(String.valueOf(sb.charAt(i)));
@@ -100,5 +91,21 @@ public class Hamster {
             }
         }
         return true;
+    }
+
+    private static int sumOfSB(StringBuilder sb) {
+        return Arrays.stream(sb.toString().split("")).
+                mapToInt(Integer::parseInt).sum();
+    }
+
+    private static StringBuilder orderByDictionary(StringBuilder sb1, StringBuilder sb2) {
+        String a = sb1.toString();
+        String b = sb2.toString();
+
+        String[] arr = {a, b};
+
+        Arrays.sort(arr);
+
+        return new StringBuilder(arr[0]);
     }
 }
