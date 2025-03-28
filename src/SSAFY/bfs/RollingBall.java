@@ -18,9 +18,6 @@ public class RollingBall {
                 }
             }
 
-            int[] dx = {-1, 1, 0, 0};
-            int[] dy = {0, 0, -1, 1};
-
             int result = Integer.MIN_VALUE;
 
             for (int x = 0; x < N; x++) {

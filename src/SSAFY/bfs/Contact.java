@@ -1,4 +1,4 @@
-package SSAFY.미정;
+package SSAFY.bfs;
 
 import java.util.*;
 
