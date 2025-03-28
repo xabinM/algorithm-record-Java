@@ -1,4 +1,4 @@
-package SSAFY.MST;
+package SSAFY.MST.unionFind;
 
 import java.util.*;
 
