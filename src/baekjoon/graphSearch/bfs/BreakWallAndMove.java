@@ -31,7 +31,7 @@ public class BreakWallAndMove {
         bfs(new Node(0, 0, 1));
 
     }
-
+    // 최단 경로를 구해야 함이 적용되지 않음. 수정해야함
     private static int bfs(Node start) {
         Queue<Node> queue = new ArrayDeque<>();
         int[] dx = {-1, 1, 0, 0};
