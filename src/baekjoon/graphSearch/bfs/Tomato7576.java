@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Tomato {
+public class Tomato7576 {
     private static int M, N;
     private static int[][] box;
     private static final int[] dx = {-1, 1, 0, 0};

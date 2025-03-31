@@ -10,7 +10,7 @@ public class BreakWallAndMove {
     private static int M;
     private static int[][] graph;
     private static boolean[][] visited;
-    private static boolean breakChance = false;
+    private static int[][] resultGraph;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -27,9 +27,16 @@ public class BreakWallAndMove {
         }
 
         visited = new boolean[N][M];
+        resultGraph = new int[N][M];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                resultGraph[i][j] = Integer.MAX_VALUE;
+            }
+        }
 
-        bfs(new Node(0, 0, 1));
+        int result = bfs(new Node(0, 0, 1, false));
 
+        System.out.println(result);
     }
     // 최단 경로를 구해야 함이 적용되지 않음. 수정해야함
     private static int bfs(Node start) {
@@ -44,19 +51,20 @@ public class BreakWallAndMove {
             int x = node.x;
             int y = node.y;
             visited[x][y] = true;
-            graph[x][y] = node.depth;
+            resultGraph[x][y] = Math.min(resultGraph[x][y], node.depth);
 
             for (int k = 0; k < 4; k++) {
                 int nx = x + dx[k];
                 int ny = y + dy[k];
 
                 if (nx >= 0 && nx < N && ny >= 0 && ny < M && !visited[nx][ny]) {
-                    if (graph[nx][ny] == 1  && breakChance) {
+                    if (graph[nx][ny] == 1  && node.breakChance) {
                         continue;
-                    } else if (graph[nx][ny] == 1 && !breakChance) {
-                        breakChance = true;
+                    } else if (graph[nx][ny] == 1 && !node.breakChance) {
+                        queue.offer(new Node(nx, ny, node.depth + 1, true));
+                        continue;
                     }
-                    queue.offer(new Node(nx, ny, node.depth + 1));
+                    queue.offer(new Node(nx, ny, node.depth + 1, node.breakChance));
                 }
             }
         }
@@ -64,17 +72,20 @@ public class BreakWallAndMove {
         if (!visited[N - 1][M - 1]) {
             return -1;
         } else {
-            return graph[N - 1][M - 1];
+            return resultGraph[N - 1][M - 1];
         }
 
     }
 
     private static class Node {
         int x, y, depth;
+        boolean breakChance;
 
-        public Node(int x, int y, int depth) {
+        public Node(int x, int y, int depth, boolean breakChance) {
             this.x = x;
             this.y = y;
+            this.depth = depth;
+            this.breakChance = breakChance;
         }
     }
 }
