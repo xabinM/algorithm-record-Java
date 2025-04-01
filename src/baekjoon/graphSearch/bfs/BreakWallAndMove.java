@@ -1,16 +1,12 @@
 package baekjoon.graphSearch.bfs;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class BreakWallAndMove {
     private static int N;
     private static int M;
     private static int[][] graph;
-    private static boolean[][] visited;
-    private static int[][] resultGraph;
+    private static boolean[][][] visited; // 벽 부순 여부까지 체크하는 방문 배열
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,62 +22,56 @@ public class BreakWallAndMove {
                     .toArray();
         }
 
-        visited = new boolean[N][M];
-        resultGraph = new int[N][M];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                resultGraph[i][j] = Integer.MAX_VALUE;
-            }
-        }
+        visited = new boolean[N][M][2]; // 0: 벽 안 부숨, 1: 벽 부숨
 
-        int result = bfs(new Node(0, 0, 1, false));
-
+        int result = bfs();
         System.out.println(result);
     }
-    // 최단 경로를 구해야 함이 적용되지 않음. 수정해야함
-    private static int bfs(Node start) {
+
+    private static int bfs() {
         Queue<Node> queue = new ArrayDeque<>();
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
 
-        queue.offer(start);
+        queue.offer(new Node(0, 0, 1, 0)); // 초기 상태: (0,0)에서 출발, depth=1, 벽 안 부숨
+        visited[0][0][0] = true;
 
         while (!queue.isEmpty()) {
             Node node = queue.poll();
             int x = node.x;
             int y = node.y;
-            visited[x][y] = true;
-            resultGraph[x][y] = Math.min(resultGraph[x][y], node.depth);
+            int depth = node.depth;
+            int breakChance = node.breakChance; // 0이면 벽 안 부숨, 1이면 부숨
+
+            if (x == N - 1 && y == M - 1) {
+                return depth; // 도착 시 depth 반환
+            }
 
             for (int k = 0; k < 4; k++) {
                 int nx = x + dx[k];
                 int ny = y + dy[k];
 
-                if (nx >= 0 && nx < N && ny >= 0 && ny < M && !visited[nx][ny]) {
-                    if (graph[nx][ny] == 1  && node.breakChance) {
-                        continue;
-                    } else if (graph[nx][ny] == 1 && !node.breakChance) {
-                        queue.offer(new Node(nx, ny, node.depth + 1, true));
-                        continue;
+                if (nx >= 0 && nx < N && ny >= 0 && ny < M) {
+                    if (graph[nx][ny] == 0 && !visited[nx][ny][breakChance]) {
+                        // 벽이 아니고 방문하지 않았으면 이동 가능
+                        queue.offer(new Node(nx, ny, depth + 1, breakChance));
+                        visited[nx][ny][breakChance] = true;
+                    } else if (graph[nx][ny] == 1 && breakChance == 0 && !visited[nx][ny][1]) {
+                        // 벽을 만나고 아직 안 부쉈으면 부수고 이동
+                        queue.offer(new Node(nx, ny, depth + 1, 1));
+                        visited[nx][ny][1] = true;
                     }
-                    queue.offer(new Node(nx, ny, node.depth + 1, node.breakChance));
                 }
             }
         }
 
-        if (!visited[N - 1][M - 1]) {
-            return -1;
-        } else {
-            return resultGraph[N - 1][M - 1];
-        }
-
+        return -1; // 도착 못하면 -1 반환
     }
 
     private static class Node {
-        int x, y, depth;
-        boolean breakChance;
+        int x, y, depth, breakChance;
 
-        public Node(int x, int y, int depth, boolean breakChance) {
+        public Node(int x, int y, int depth, int breakChance) {
             this.x = x;
             this.y = y;
             this.depth = depth;
