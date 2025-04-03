@@ -1,4 +1,4 @@
-package SSAFY.배낭문제;
+package SSAFY.dp.배낭문제;
 
 import java.util.Arrays;
 import java.util.Scanner;
