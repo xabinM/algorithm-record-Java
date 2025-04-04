@@ -3,7 +3,7 @@ package baekjoon.graphSearch.dfs;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class BreakWallAndMove {
+public class BreakWallAndMove2206 {
     private static int N;
     private static int M;
     private static int[][] graph;

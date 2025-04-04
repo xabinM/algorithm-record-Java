@@ -3,7 +3,7 @@ package baekjoon.DP;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DownHill {
+public class DownHill1520 {
     private static int M;
     private static int N;
     private static int[][] graph;
