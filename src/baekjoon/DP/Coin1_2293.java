@@ -2,7 +2,7 @@ package baekjoon.DP;
 
 import java.util.Scanner;
 
-public class Coin1 {
+public class Coin1_2293 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
