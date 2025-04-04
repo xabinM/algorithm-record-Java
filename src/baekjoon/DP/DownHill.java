@@ -7,8 +7,7 @@ public class DownHill {
     private static int M;
     private static int N;
     private static int[][] graph;
-    private static boolean[][] visited;
-    private static int cnt;
+    private static int[][] dp;
     private static final int[] dx = {-1, 1, 0, 0};
     private static final int[] dy = {0, 0, -1, 1};
 
@@ -27,31 +26,38 @@ public class DownHill {
                     .toArray();
         }
 
-        visited = new boolean[M][N];
+        dp = new int[M][N];
+        for (int i = 0; i < M; i++) {
+            Arrays.fill(dp[i], -1);
+        }
 
-        dfs(0, 0);
+        int result = dfs(0, 0);
 
-        System.out.println(cnt);
+        System.out.println(result);
     }
 
     //dfs
-    private static void dfs(int x, int y) {
+    private static int dfs(int x, int y) {
         if (x == M - 1 && y == N - 1) {
-            cnt++;
-            return;
+            return 1;
         }
 
+        if (dp[x][y] != -1) {
+            return dp[x][y];
+        }
+
+        dp[x][y] = 0;
         for (int k = 0; k < 4; k++) {
             int nx = x + dx[k];
             int ny = y + dy[k];
 
             if (nx >= 0 && nx < M && ny >= 0 && ny < N) {
-                if (!visited[nx][ny] && graph[nx][ny] < graph[x][y]) {
-                    visited[nx][ny] = true;
-                    dfs(nx, ny);
-                    visited[nx][ny] = false;
+                if (graph[x][y] > graph[nx][ny]) {
+                    dp[x][y] += dfs(nx, ny);
                 }
             }
         }
+
+        return dp[x][y];
     }
 }
