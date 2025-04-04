@@ -21,7 +21,9 @@ public class Coin2 {
 
         for (int coin : coins) {
             for (int i = coin; i <= k; i++) {
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                if (dp[i - coin] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
             }
         }
 
