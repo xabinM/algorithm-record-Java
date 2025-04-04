@@ -3,7 +3,7 @@ package baekjoon.DP;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Coin2 {
+public class Coin2_2294 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
