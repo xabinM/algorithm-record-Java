@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Sheep {
+public class Sheep3184 {
     private static int R, C;
     private static String[][] graph;
     private static final int[] dx = {-1, 1, 0, 0};
