@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Laboratory {
+public class Laboratory14502 {
     private static int N, M;
     private static int[][] graph;
     private static int maxSafeArea = 0;
