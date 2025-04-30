@@ -1,4 +1,4 @@
-package baekjoon;
+package baekjoon.avatar;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;

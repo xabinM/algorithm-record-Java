@@ -1,11 +1,11 @@
-package baekjoon;
+package baekjoon.avatar;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 // 17413
-public class baek17413 {
+public class WordReverse17413 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 

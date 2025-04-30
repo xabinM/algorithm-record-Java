@@ -1,10 +1,10 @@
-package baekjoon;
+package baekjoon.avatar;
 
 import java.util.Scanner;
 
 import static java.lang.Math.abs;
 
-public class baek2467 {
+public class Solution2467 {
     public static void solution(int N, int[] liquid){
         int left = 0;
         int right = N - 1;
