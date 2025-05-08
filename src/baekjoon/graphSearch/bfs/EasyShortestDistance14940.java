@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class EasyShortestPath14940 {
+public class EasyShortestDistance14940 {
     private static int n, m;
     private static int[][] graph;
     private static int[][] dist;
