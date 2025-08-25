@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class ZombieVirus {
     private static int N, M;
     private static int[][] graph;
-    private static boolean[][] visited;
     private static final int[] dx = {-1, 1, 0, 0};
     private static final int[] dy = {0, 0, -1, 1};
 
@@ -28,26 +27,39 @@ public class ZombieVirus {
         }
 
 
-        visited = new boolean[N][M];
         while (true) {
-            boolean flag = false;
+            boolean hasZero = false;
+            boolean[][] visited = new boolean[N][M];
+            int[][] nextState = new int[N][M];
 
             Deque<Node> nodes = new ArrayDeque<>();
-
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < M; j++) {
-                    if (!visited[i][j] && (graph[i][j] == 1 || graph[i][j] == 2)) {
+                    if (graph[i][j] == 0){
+                        hasZero = true;
+                    }
+                    if ((graph[i][j] == 1 || graph[i][j] == 2)) {
                         nodes.offer(new Node(i, j, graph[i][j]));
                         visited[i][j] = true;
-                        flag = true;
                     }
                 }
             }
-            bfs(nodes);
+            bfs(nodes, visited, nextState);
 
-            if (!flag) {
-                break;
+            boolean changed = false;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    if (nextState[i][j] == 0) continue;
+                    if (graph[i][j] == 0) {
+                        graph[i][j] = nextState[i][j];
+                        changed = true;
+                    } else if (graph[i][j] != nextState[i][j] && graph[i][j] != -1) {
+                        graph[i][j] = 3;
+                        changed = true;
+                    }
+                }
             }
+            if (!hasZero || !changed) break;
         }
 
         int one = 0;
@@ -64,15 +76,13 @@ public class ZombieVirus {
                     case 3: three++;
                     break;
                 }
-                System.out.print(graph[i][j] + " ");
             }
-            System.out.println();
         }
 
         System.out.println(one + " " + two + " " + three);
     }
 
-    private static void bfs(Deque<Node> nodes) {
+    private static void bfs(Deque<Node> nodes, boolean[][] visited, int[][] nextState) {
         while (!nodes.isEmpty()) {
             Node cur = nodes.poll();
             int x = cur.x;
@@ -83,16 +93,15 @@ public class ZombieVirus {
                 int ny = y + dy[k];
 
                 if (nx < 0 || nx >= N || ny <0 || ny >= M) continue;
-                
-                if (!visited[nx][ny]) {
-                    if (graph[nx][ny] == -1) {
-                        continue;
-                    }
-                    if (graph[nx][ny] != 0) {
-                        graph[nx][ny] = 3;
-                    }
-                    graph[nx][ny] = cur.value;
-                    visited[nx][ny] = true;
+                if (visited[nx][ny]) continue;
+                if (graph[nx][ny] == -1) continue;
+
+                visited[nx][ny] = true;
+
+                if (nextState[nx][ny] == 0) {
+                    nextState[nx][ny] = cur.value;
+                } else if (nextState[nx][ny] != cur.value) {
+                    nextState[nx][ny] = 3;
                 }
             }
         }
