@@ -1,8 +1,12 @@
 package SSAFY.삼성A형;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class practice {
+    private static int N, W, H;
+    private static final int[] dx = {-1, 1, 0, 0};
+    private static final int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -11,36 +15,105 @@ public class practice {
 
         for (int t = 1; t <= T; t++) {
 
-            int N = sc.nextInt();
-            int K = sc.nextInt();
+            N = sc.nextInt();
+            W = sc.nextInt();
+            H = sc.nextInt();
             sc.nextLine();
 
-            String[] temp = sc.nextLine().split("");
-            LinkedList<String> arr = new LinkedList<>(Arrays.asList(temp));
+            int[][] graph = new int[H][W];
+            for (int i = 0; i < H; i++) {
+                graph[i] = Arrays.stream(sc.nextLine().split(" "))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
+            }
 
-            Set<String> hexes = new HashSet<>();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < N / 4; i++) {   // 자리 변경 후 카운트
+            int result = dfs(0, graph);
 
-                for (String s : arr) {
-                    sb.append(s);
-                    if (sb.length() == N / 4) {
-                        hexes.add(String.valueOf(sb));
-                        sb = new StringBuilder();
-                    }
+            System.out.println("#" + t + " " + result);
+        }
+    }
+
+    private static int dfs(int depth, int[][] graph) {
+        int remain = sumBricks(graph);
+
+        if (depth == N || remain == 0) {
+
+            return remain;
+        }
+
+        int min = H * W;
+        for (int i = 0; i < W; i++) {
+
+            int[][] curGraph = new int[H][W];
+            for (int j = 0; j < H; j++) {
+                System.arraycopy(graph[j], 0, curGraph[j], 0, W);
+            }
+
+            int x = findX(i, curGraph);
+            if (x == -1) continue;
+
+            boom(x, i, curGraph);
+            dropBlock(curGraph);
+
+            min = Math.min(min, dfs(depth + 1, curGraph));
+        }
+
+        return (min == H * W) ? remain : min;
+    }
+
+    private static int sumBricks(int[][] graph) {
+        int cnt = 0;
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                if (graph[i][j] != 0) {
+                    cnt += 1;
                 }
-                arr.addLast(arr.pollFirst());
             }
+        }
+        return cnt;
+    }
 
-            List<Integer> password = new ArrayList<>();
-            for (String hex : hexes) {
-                int integer = Integer.parseInt(hex, 16);
-                password.add(integer);
+    private static int findX(int col, int[][] graph) {
+        for (int i = 0; i < H; i++) {
+            if (graph[i][col] != 0) {
+                return i;
             }
+        }
+        return -1;
+    }
 
-            password.sort(null);
+    private static void boom(int x, int y, int[][] graph) {
+        int spread = graph[x][y];
+        graph[x][y] = 0;
 
-            System.out.println("#" + t + " " + password.get(password.size() - K));
+        if (spread > 1) {
+            for (int i = 1; i < spread; i++) {
+                for (int k = 0; k < 4; k++) {
+                    int nx = x + dx[k] * i;
+                    int ny = y + dy[k] * i;
+
+                    if (nx < 0 || nx >= H || ny < 0 || ny >= W || graph[nx][ny] == 0) continue;
+
+                    boom(nx, ny, graph);
+                }
+            }
+        }
+    }
+
+    private static void dropBlock(int[][] graph) {
+        for (int i = 0; i < W; i++) {
+
+            for (int j = H - 1; j >= 0; j--) {
+                if (graph[j][i] != 0) continue;
+
+                for (int k = j - 1; k >= 0; k--) {
+                    if (graph[k][i] == 0) continue;
+
+                    graph[j][i] = graph[k][i];
+                    graph[k][i] = 0;
+                    break;
+                }
+            }
         }
     }
 }
