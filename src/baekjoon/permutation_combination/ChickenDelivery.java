@@ -1,4 +1,4 @@
-package baekjoon.avatar;
+package baekjoon.permutation_combination;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class ChickenDelivery {
 
         for (int i = start; i < chickenRestaurant.size(); i++) {
             arr[depth] = i;
-            combination(start + 1, depth + 1, arr);
+            combination(i + 1, depth + 1, arr);
         }
     }
 
