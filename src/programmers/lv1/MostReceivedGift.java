@@ -6,13 +6,13 @@ public class MostReceivedGift {
 
     public static void main(String[] args) {
 
-        String[] friends = {"muzi", "ryan", "frodo", "neo"};
-        String[] gifts = {"muzi frodo", "muzi frodo", "ryan muzi", "ryan muzi",
-                "ryan muzi", "frodo muzi", "frodo ryan", "neo muzi"};
+//        String[] friends = {"muzi", "ryan", "frodo", "neo"};
+//        String[] gifts = {"muzi frodo", "muzi frodo", "ryan muzi", "ryan muzi",
+//                "ryan muzi", "frodo muzi", "frodo ryan", "neo muzi"};
 
-//        String[] friends = {"joy", "brad", "alessandro", "conan", "david"};
-//        String[] gifts = {"alessandro brad", "alessandro joy",
-//                "alessandro conan", "david alessandro", "alessandro david"};
+        String[] friends = {"joy", "brad", "alessandro", "conan", "david"};
+        String[] gifts = {"alessandro brad", "alessandro joy",
+                "alessandro conan", "david alessandro", "alessandro david"};
 
         System.out.println(solution(friends, gifts));
     }
@@ -33,11 +33,7 @@ public class MostReceivedGift {
             gMan.give++;
             tMan.take++;
 
-            if (gMan.friends.containsKey(take)) {
-                gMan.friends.put(take, 1);
-            } else {
-                gMan.friends.put(take, gMan.friends.get(take) + 1);
-            }
+            gMan.record.put(tMan, gMan.record.getOrDefault(tMan, 0) + 1);
         }
 
         for (Man man : mans) {
@@ -45,12 +41,39 @@ public class MostReceivedGift {
         }
 
         // 다음달 선물 개수 찾기
-        for (Man man : mans) {
+        // 사람 둘을 정하고 서로 누구의 next가 증가할지 정해야함
+        for (int i = 0; i < friends.length; i++) {
+            for (int j = i + 1; j < friends.length; j++) {
+                Man me = mans.get(i);
+                Man you = mans.get(j);
 
-
+                countGift(me, you);
+            }
         }
 
-        return 0;
+        int max = 0;
+        for (Man man : mans) {
+            max = Math.max(man.next, max);
+        }
+
+        return max;
+    }
+
+    private static void countGift(Man me, Man you) {
+        int meToYouCount = me.record.getOrDefault(you, 0);
+        int youTomeCount = you.record.getOrDefault(me, 0);
+
+        if (meToYouCount > youTomeCount) {
+            me.next++;
+        } else if (meToYouCount < youTomeCount) {
+            you.next++;
+        } else {
+            if (me.score < you.score) {
+                you.next++;
+            } else if (me.score > you.score) {
+                me.next++;
+            }
+        }
     }
 
     private static Man findMan(List<Man> mans, String name) {
@@ -66,7 +89,7 @@ public class MostReceivedGift {
     private static class Man {
         String name;
 
-        Map<String, Integer> friends = new HashMap<>();
+        Map<Man, Integer> record = new HashMap<>();
 
         //선물지수
         int give;
