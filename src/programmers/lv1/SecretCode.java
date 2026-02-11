@@ -38,10 +38,18 @@ public class SecretCode {
                 } else {
                     temp = 0;
                 }
+
+                boolean isSkip = false;
+
                 for (String curSkip : splitSkip) {
-                    if (!alphabet[temp].equals(curSkip)) {
-                        tempIndex--;
+                    if (alphabet[temp].equals(curSkip)) {
+                        isSkip = true;
+                        break;
                     }
+                }
+
+                if (!isSkip) {
+                    tempIndex--;
                 }
             }
 
