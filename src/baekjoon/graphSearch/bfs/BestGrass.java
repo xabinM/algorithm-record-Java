@@ -1,4 +1,4 @@
-package baekjoon.graphSearch;
+package baekjoon.graphSearch.bfs;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
