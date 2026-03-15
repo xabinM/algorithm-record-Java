@@ -7,10 +7,17 @@ public class YellowBlinker {
         int G1 = signals[0][0];
         int Y1 = signals[0][1];
         int R1 = signals[0][2];
-
         int C1 = G1 + Y1 + R1;
 
-        for (int k = 0; k < 100000; k++) {
+        int lcm = C1;
+
+        for (int i = 1; i < signals.length; i++) {
+            int C = signals[i][0] + signals[i][1] + signals[i][2];
+            lcm = lcm(lcm, C);
+        }
+        int maxK = lcm / C1 + 1;
+
+        for (int k = 0; k < maxK; k++) {
 
             for (int o = 0; o < Y1; o++) {
 
@@ -40,5 +47,13 @@ public class YellowBlinker {
             }
         }
         return -1;
+    }
+
+    private int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    private int lcm(int a, int b) {
+        return (a * b) / gcd(a, b);
     }
 }
