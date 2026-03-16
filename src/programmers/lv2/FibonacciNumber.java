@@ -9,14 +9,15 @@ public class FibonacciNumber {
 
     public static int solution(int n) {
 
-        return fibonacci(n) % 1234567;
-    }
+        int[] dp = new int[n + 1];
 
-    private static int fibonacci(int n) {
-        if (n == 0 || n == 1) {
-            return n;
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            dp[i] = (dp[i - 1] + dp[i - 2]) % 1234567;
         }
 
-        return fibonacci(n - 1) + fibonacci(n - 2);
+        return dp[n];
     }
 }
